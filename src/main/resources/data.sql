@@ -10,6 +10,6 @@ create TABLE student (
 );
 
 insert into student (first_name, middle_name, last_name, birth_date, email) values
- ('Ivan', 'Ivanovich', 'Ivanov', '01-01-2001', 'ivan@gmail.com'),
- ('Petr', 'Petrovich', 'Petrov', '02-02-2002', 'petrov@gmail.com'),
- ('Sidr', 'Sidorovich', 'Sidorov', '03-03-2003', 'sidorov@gmail.com');
+ ('Ivan', 'Ivanovich', 'Ivanov', '2001-01-01', 'ivanov@mail.ru'),
+ ('Petr', 'Petrovich', 'Petrov', '2002-02-02', 'petrov@yandex.ru'),
+ ('Sidor', 'Sidorovich', 'Sidorov', '2003-03-03', 'sidorov@gmail.com');

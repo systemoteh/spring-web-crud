@@ -19,7 +19,7 @@ public class Student {
     private String middleName;
     @Column(name = "last_name", length = 250, nullable = false)
     private String lastName;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "birth_date", nullable = false)
     private Date birthDate;
     @Column(name = "email", length = 250)
