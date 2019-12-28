@@ -20,4 +20,8 @@ public class StudentService {
     public Student findById(Long id) {
         return studentRepository.findAllById(id);
     }
+
+    public void deleteById(Long id) {
+        studentRepository.deleteById(id);
+    }
 }

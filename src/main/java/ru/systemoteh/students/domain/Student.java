@@ -3,6 +3,7 @@ package ru.systemoteh.students.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Data
@@ -24,4 +25,9 @@ public class Student {
     private Date birthDate;
     @Column(name = "email", length = 250)
     private String email;
+
+    public String getBirthDate() {
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyy");
+        return format.format(birthDate);
+    }
 }

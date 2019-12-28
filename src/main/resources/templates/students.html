@@ -3,31 +3,53 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <title>All students</title>
-
-    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/css/main.css}"/>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
 </head>
-
 <body>
-
-
-
 <main role="main" class="container">
-
-    <div class="starter-template">
-        <h1>All students</h1>
+    <div class="row justify-content-center pt-3">
+        <h2>All students</h2>
     </div>
-
-    <ol>
-        <li th:each="student : ${students}" th:text="${student.firstName}"></li>
-    </ol>
-
+    <div class="input-group text-center pb-3">
+        <a href="/add" class="btn btn-success">Add new Student</a>
+    </div>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">First name</th>
+            <th scope="col">Middle name</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Birth date</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="student : ${students}">
+            <tr>
+                <td th:text="${student.id}"></td>
+                <td th:text="${student.firstName}"></td>
+                <td th:text="${student.middleName}"></td>
+                <td th:text="${student.lastName}"></td>
+                <td th:text="${student.birthDate}"></td>
+                <td th:text="${student.email}"></td>
+                <td><a th:href="@{'/edit/'+ ${student.id}}" class="btn btn-primary">Edit</a></td>
+                <td>
+                    <form action="#" th:action="@{'/delete/'+ ${student.id}}" method="post">
+                        <input type="submit" class="btn btn-danger" value="Delete"/>
+                    </form>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
 </main>
-<!-- /.container -->
-
-<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
 </body>
 </html>
