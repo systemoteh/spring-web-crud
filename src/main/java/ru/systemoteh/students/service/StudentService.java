@@ -1,27 +1,17 @@
 package ru.systemoteh.students.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import ru.systemoteh.students.domain.Student;
-import ru.systemoteh.students.repository.StudentRepository;
 
 import java.util.List;
+import java.util.Optional;
 
-@Service
-public class StudentService {
+public interface StudentService {
 
-    @Autowired
-    StudentRepository studentRepository;
+    List<Student> findAll();
 
-    public List<Student> findAll() {
-        return studentRepository.findAll();
-    }
+    Optional<Student> findById(Long id);
 
-    public Student findById(Long id) {
-        return studentRepository.findAllById(id);
-    }
+    void deleteById(Long id);
 
-    public void deleteById(Long id) {
-        studentRepository.deleteById(id);
-    }
+    void save(Student student);
 }

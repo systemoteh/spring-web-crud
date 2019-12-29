@@ -16,9 +16,12 @@
         <h2>All students</h2>
     </div>
     <div class="input-group text-center pb-3">
-        <a href="/add" class="btn btn-success">Add new Student</a>
+        <form action="#" th:action="@{/edit}" method="post">
+            <input type="submit" class="btn btn-success" value="Add new Student"/>
+        </form>
     </div>
     <table class="table table-hover">
+        <caption>Total count:</caption>
         <thead class="thead-dark">
         <tr>
             <th scope="col">ID</th>
@@ -38,9 +41,19 @@
                 <td th:text="${student.firstName}"></td>
                 <td th:text="${student.middleName}"></td>
                 <td th:text="${student.lastName}"></td>
-                <td th:text="${student.birthDate}"></td>
+                <td th:text="${#dates.format(student.birthDate, 'yyyy-MM-dd')}"></td>
                 <td th:text="${student.email}"></td>
-                <td><a th:href="@{'/edit/'+ ${student.id}}" class="btn btn-primary">Edit</a></td>
+                <td>
+                    <form action="#" method="post" th:action="@{/edit}" th:object="${student}">
+                        <!--thymeleaf post form in loop (with object)-->
+                        <input type="hidden" th:value="*{id}" id="id" name="id"/>
+                        <input type="hidden" th:value="*{firstName}" id="firstName" name="firstName"/>
+                        <input type="hidden" th:value="*{middleName}" id="middleName" name="middleName"/>
+                        <input type="hidden" th:value="*{lastName}" id="lastName" name="lastName"/>
+                        <input type="hidden" th:value="*{birthDate}" id="birthDate" name="birthDate" datatype="date"/>
+                        <input type="hidden" th:value="*{email}" id="email" name="email"/>
+                        <input type="submit" class="btn btn-primary" value="Edit"/>
+                    </form>
                 <td>
                     <form action="#" th:action="@{'/delete/'+ ${student.id}}" method="post">
                         <input type="submit" class="btn btn-danger" value="Delete"/>
