@@ -6,8 +6,6 @@ import ru.systemoteh.students.domain.Student;
 import java.util.List;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
-    List<Student> findByFirstNameLikeOrLastNameLikeOrMiddleNameLikeOrEmailLike(String firstName,
-                                                                               String middleName,
-                                                                               String lastName,
-                                                                               String email);
+    List<Student> findByFirstNameContainingOrLastNameContainingOrMiddleNameContainingOrEmailContaining(
+            String firstName, String middleName, String lastName, String email);
 }

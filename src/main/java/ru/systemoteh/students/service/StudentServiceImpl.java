@@ -14,19 +14,28 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     StudentRepository studentRepository;
 
+    @Override
     public List<Student> findAll() {
         return studentRepository.findAll();
     }
 
+    @Override
     public List<Student> findByQuery(String query) {
-        return studentRepository.findByFirstNameLikeOrLastNameLikeOrMiddleNameLikeOrEmailLike(query, query, query, query);
+        return studentRepository.findByFirstNameContainingOrLastNameContainingOrMiddleNameContainingOrEmailContaining(query, query, query, query);
     }
 
+    @Override
     public void deleteById(Long id) {
         studentRepository.deleteById(id);
     }
 
+    @Override
     public void save(Student student) {
         studentRepository.save(student);
+    }
+
+    @Override
+    public Optional<Student> findById(Long id) {
+        return studentRepository.findById(id);
     }
 }
