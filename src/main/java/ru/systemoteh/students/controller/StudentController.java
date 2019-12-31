@@ -3,10 +3,7 @@ package ru.systemoteh.students.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.systemoteh.students.domain.Student;
 import ru.systemoteh.students.service.StudentService;
 
@@ -16,16 +13,17 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
-    @GetMapping("/students")
+    @GetMapping(value = "/students")
     public String findAll(Model model) {
         model.addAttribute("students", studentService.findAll());
         return "students";
     }
 
-    @GetMapping(value = "/view/{id}")
-    public String findById(@PathVariable Long id, Model model) {
-        model.addAttribute("student", studentService.findById(id));
-        return "studentDetail";
+    @GetMapping(value = "/search")
+    public String findByParam(@RequestParam(value = "query", required = false) String query, Model model) {
+        model.addAttribute("students", studentService.findByQuery(query));
+        model.addAttribute("query", query);
+        return "/students";
     }
 
     @PostMapping(value = "/delete/{id}")

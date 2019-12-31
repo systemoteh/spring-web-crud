@@ -15,11 +15,16 @@
     <div class="row justify-content-center pt-3">
         <h2>All students</h2>
     </div>
-    <div class="input-group text-center pb-3">
-        <form action="#" th:action="@{/edit}" method="post">
-            <input type="submit" class="btn btn-success" value="Add new Student"/>
+    <nav class="navbar navbar-light bg-light justify-content-between">
+        <form action="#" th:action="@{/edit}" method="post" class="navbar-brand">
+            <input type="submit" value="Add new Student" class="btn btn-success"/>
         </form>
-    </div>
+        <form action="#" th:action="@{'/search'}" method="get" class="form-inline">
+            <input type="search" th:value="${query}" aria-label="Search" placeholder="Search"
+                   class="form-control mr-sm-2">
+            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
+        </form>
+    </nav>
     <table class="table table-hover">
         <caption>Total count:</caption>
         <thead class="thead-dark">
@@ -50,13 +55,13 @@
                         <input type="hidden" th:value="*{firstName}" id="firstName" name="firstName"/>
                         <input type="hidden" th:value="*{middleName}" id="middleName" name="middleName"/>
                         <input type="hidden" th:value="*{lastName}" id="lastName" name="lastName"/>
-                        <input type="hidden" th:value="*{birthDate}" id="birthDate" name="birthDate" datatype="date"/>
+                        <input type="hidden" th:value="*{birthDate}" id="birthDate" name="birthDate"/>
                         <input type="hidden" th:value="*{email}" id="email" name="email"/>
                         <input type="submit" class="btn btn-primary" value="Edit"/>
                     </form>
                 <td>
                     <form action="#" th:action="@{'/delete/'+ ${student.id}}" method="post">
-                        <input type="submit" class="btn btn-danger" value="Delete"/>
+                        <input type="submit" value="Delete" class="btn btn-danger"/>
                     </form>
                 </td>
             </tr>

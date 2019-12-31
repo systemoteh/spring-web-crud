@@ -18,8 +18,8 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.findAll();
     }
 
-    public Optional<Student> findById(Long id) {
-        return studentRepository.findById(id);
+    public List<Student> findByQuery(String query) {
+        return studentRepository.findByFirstNameLikeOrLastNameLikeOrMiddleNameLikeOrEmailLike(query, query, query, query);
     }
 
     public void deleteById(Long id) {

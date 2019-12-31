@@ -17,8 +17,9 @@ import java.util.Date;
 @Table(name = "student")
 public class Student {
     @Id
-    @GeneratedValue
-    @Column(name = "id", nullable = false)
+    @SequenceGenerator(name = "STUDENT_ID_GENERATOR", sequenceName = "STUDENT_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "STUDENT_ID_GENERATOR")
+    @Column(unique = true, nullable = false)
     private Long id;
     @Column(name = "first_name", length = 250, nullable = false)
     private String firstName;
