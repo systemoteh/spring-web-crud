@@ -1,0 +1,27 @@
+package ru.systemoteh.students.domain;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import javax.persistence.*;
+import java.util.Set;
+
+@Data
+@Entity
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "roles")
+public class Role {
+    @Id
+    @SequenceGenerator(name = "ROLE_ID_GENERATOR", sequenceName = "ROLES_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ROLE_ID_GENERATOR")
+    @Column(unique = true, nullable = false)
+    private Long id;
+    @Column(name = "name")
+    private String name;
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
+}
