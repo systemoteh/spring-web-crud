@@ -1,18 +1,16 @@
 package ru.systemoteh.students.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Data
 @Entity
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = "users")
+@EqualsAndHashCode(exclude = "users")
 @Table(name = "roles")
 public class Role {
     @Id

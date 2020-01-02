@@ -1,18 +1,16 @@
 package ru.systemoteh.students.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Data
 @Entity
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = "roles")
+@EqualsAndHashCode(exclude = "roles")
 @Table(name = "users")
 public class User {
     @Id
@@ -26,8 +24,8 @@ public class User {
     private String password;
     @Transient
     private String confirmPassword;
-    @ManyToMany
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
+    @ManyToMany (fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 }
