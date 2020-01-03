@@ -33,17 +33,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll();
         http.formLogin()
 //                .loginPage("/login")  // for you own implementation
-                .loginProcessingUrl("/authenticate")
+//                .loginProcessingUrl("/authenticate")
+//                .failureUrl("/login-failed")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/students")
-                .failureUrl("/login-failed")
                 .permitAll();
-//        http.logout()
-//                .logoutUrl("/logout")
-//                .logoutSuccessUrl("/login")
-//                .invalidateHttpSession(true)
-//                .deleteCookies("JSESSIONID");
+        http.logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID");
         http.rememberMe()
                 .rememberMeParameter("remember-me")
                 .tokenValiditySeconds(1209600);

@@ -24,6 +24,9 @@
                    placeholder="Search" class="form-control mr-sm-2">
             <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
         </form>
+        <form action="#" th:action="@{/logout}" method="post" class="navbar-brand">
+            <input type="submit" value="Logout" class="btn btn-primary"/>
+        </form>
     </nav>
     <table class="table table-hover">
         <caption>Total count:
@@ -59,7 +62,7 @@
                         <input type="hidden" th:value="*{lastName}" id="lastName" name="lastName"/>
                         <input type="hidden" th:value="*{birthDate}" id="birthDate" name="birthDate"/>
                         <input type="hidden" th:value="*{email}" id="email" name="email"/>
-                        <input type="submit" class="btn btn-primary" value="Edit"/>
+                        <input type="submit" class="btn btn-warning" value="Edit"/>
                     </form>
                 <td>
                     <form action="#" th:action="@{'/students/delete/'+ ${student.id}}" method="post">
