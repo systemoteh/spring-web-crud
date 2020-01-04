@@ -66,6 +66,6 @@ public class StudentRestController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         studentService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(student.get(), HttpStatus.OK);
     }
 }

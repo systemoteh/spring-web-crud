@@ -75,15 +75,15 @@ insert into student (id, first_name, middle_name, last_name, birth_date, email) 
  (student_seq.nextval, 'Petr', 'Petrovich', 'Petrov', '2002-02-02', 'petrov@yandex.ru'),
  (student_seq.nextval, 'Sidor', 'Sidorovich', 'Sidorov', '2003-03-03', 'sidorov@gmail.com');
 
--- login: admin     password: admin
 -- login: user      password: user
+-- login: admin     password: admin
 insert into users (id, username, password) values
-(users_seq.nextval, 'admin', '$2a$04$cMJ4Hhur5MQuyn41MbNRLOuYyhtq5VUucAf8uw0g.CXbjb.jtWWR2'),
-(users_seq.nextval, 'user', '$2a$04$TA3vJwtPAcBzSXBVUFIRou9qymYuKd.qF97Ia8dc1tzRpTss9roTG');
+(users_seq.nextval, 'user', '$2a$04$TA3vJwtPAcBzSXBVUFIRou9qymYuKd.qF97Ia8dc1tzRpTss9roTG'),
+(users_seq.nextval, 'admin', '$2a$04$cMJ4Hhur5MQuyn41MbNRLOuYyhtq5VUucAf8uw0g.CXbjb.jtWWR2');
 
 insert into roles (id, name) values
-(roles_seq.nextval, 'ROLE_ADMIN'),
-(roles_seq.nextval, 'ROLE_USER');
+(roles_seq.nextval, 'USER_ROLE'),
+(roles_seq.nextval, 'ADMIN_ROLE');
 
 insert into users_roles (user_id, role_id) values
 (users_roles_seq.nextval, 1),
