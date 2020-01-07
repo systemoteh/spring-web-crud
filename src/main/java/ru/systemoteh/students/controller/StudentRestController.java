@@ -40,6 +40,7 @@ public class StudentRestController {
     }
 
     @PostMapping(value = "")
+//    @PreAuthorize("hasAuthority('ADMIN_ROLE')")
     public ResponseEntity<Student> add(@RequestBody Student student) {
         HttpHeaders headers = new HttpHeaders();
         if (student == null) {

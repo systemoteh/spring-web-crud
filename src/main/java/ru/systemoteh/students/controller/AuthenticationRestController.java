@@ -9,17 +9,13 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import ru.systemoteh.students.config.AuthenticationRequestDto;
 import ru.systemoteh.students.config.JwtTokenProvider;
-import ru.systemoteh.students.domain.User;
-
-import java.util.HashMap;
-import java.util.Map;
+import ru.systemoteh.students.dto.AuthenticationRequestDto;
+import ru.systemoteh.students.dto.AuthenticationResponseDto;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/auth")
 public class AuthenticationRestController {
 
     @Autowired
@@ -29,12 +25,7 @@ public class AuthenticationRestController {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    @GetMapping(value = {"/"})
-    public String root() {
-        return "redirect:/students";
-    }
-
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity login(@RequestBody AuthenticationRequestDto requestDto) {
         try {
             String username = requestDto.getUsername();
@@ -47,11 +38,16 @@ public class AuthenticationRestController {
 
             String token = jwtTokenProvider.createToken(userDetails);
 
-            Map<Object, Object> response = new HashMap<>();
-            response.put("username", username);
-            response.put("token", token);
+            AuthenticationResponseDto responseDto = new AuthenticationResponseDto();
+            responseDto.setUsername(username);
+            responseDto.setToken(token);
 
-            return ResponseEntity.ok(response);
+            // without Data Transfer Object (DTO)
+//            Map<Object, Object> responseDto = new HashMap<>();
+//            responseDto.put("username", username);
+//            responseDto.put("token", token);
+
+            return ResponseEntity.ok(responseDto);
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid username or password");
         }

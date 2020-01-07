@@ -1,4 +1,4 @@
-package ru.systemoteh.students.config;
+package ru.systemoteh.students.exception;
 
 import org.springframework.security.core.AuthenticationException;
 

@@ -21,15 +21,21 @@ import static ru.systemoteh.students.util.Constants.*;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http
+                .csrf().disable()
+                .authorizeRequests()
                 .antMatchers(USER_ADMIN_ENDPOINTS).hasAnyAuthority(USER_ADMIN_ROLE)
                 .antMatchers(ADMIN_ENDPOINTS).hasAuthority(ADMIN_ROLE)
-                .antMatchers(ANONYMOUS_ENDPOINTS).anonymous()
-                .anyRequest().authenticated();
-        http.formLogin()
+                .antMatchers(ANONYMOUS_ENDPOINTS).permitAll()
+                .anyRequest().authenticated()
+
+                .and()
+                .formLogin()
                 // for you own implementation
 //                .loginPage("/login")
 //                .loginProcessingUrl("/authenticate")
@@ -37,15 +43,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/students")
-                .permitAll();
-        http.logout()
+                .permitAll()
+
+                .and()
+                .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
+                .logoutSuccessUrl("/login")
                 .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID");
-        http.rememberMe()
+                .deleteCookies("JSESSIONID")
+
+                .and()
+                .rememberMe()
                 .rememberMeParameter("remember-me")
-                .tokenValiditySeconds(1209600);
+                .tokenValiditySeconds(1209600)
+
+                .and()
+                .apply(new JwtConfigurer(jwtTokenProvider));
     }
 
     @Bean

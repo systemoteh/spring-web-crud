@@ -1,8 +1,9 @@
-package ru.systemoteh.students.config;
+package ru.systemoteh.students.filter;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
+import ru.systemoteh.students.config.JwtTokenProvider;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
