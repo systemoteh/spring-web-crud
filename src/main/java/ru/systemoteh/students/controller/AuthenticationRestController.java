@@ -29,13 +29,13 @@ public class AuthenticationRestController {
     public ResponseEntity login(@RequestBody AuthenticationRequestDto requestDto) {
         try {
             String username = requestDto.getUsername();
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
             if (userDetails == null) {
                 throw new UsernameNotFoundException("User with username: " + username + " not found");
             }
 
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
             String token = jwtTokenProvider.createToken(userDetails);
 
             AuthenticationResponseDto responseDto = new AuthenticationResponseDto();
