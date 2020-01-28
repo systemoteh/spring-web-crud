@@ -8,12 +8,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
-import ru.systemoteh.students.exception.JwtAuthenticationException;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 import java.util.Date;
+
+import static com.sun.org.apache.xml.internal.utils.LocaleUtility.EMPTY_STRING;
 
 @Component
 public class JwtTokenProvider {
@@ -63,7 +64,7 @@ public class JwtTokenProvider {
         if (bearerToken != null && bearerToken.startsWith("Bearer")) {
             return bearerToken.substring(7, bearerToken.length());
         }
-        return null;
+        return EMPTY_STRING;
     }
 
     public boolean validateToken(String token) {
@@ -76,7 +77,8 @@ public class JwtTokenProvider {
 
             return true;
         } catch (JwtException | IllegalArgumentException e) {
-            throw new JwtAuthenticationException("JWT token is expired or invalid");
+            return false;
+//            throw new JwtAuthenticationException("JWT token is expired or invalid");
         }
     }
 }
